@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodTravel Group | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { margin: 0; background-color: #f8f9fa; color: #333; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 10%; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-weight: 700; font-size: 24px; color: #1a4d7c; }
+        .nav-links a { text-decoration: none; color: #333; margin-left: 20px; transition: 0.3s; }
+        .nav-links a:hover { color: #2d82cf; }
+        .btn-login { background: #1a4d7c; color: #fff !important; padding: 8px 20px; border-radius: 20px; }
+        .hero { background: linear-gradient(135deg, #1e5799 0%, #2d82cf 100%); color: white; padding: 60px 10%; border-radius: 25px; margin: 20px 10%; }
+        .btn-primary { background: #ff6b35; color: white; padding: 12px 25px; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; }
+        .container { padding: 40px 10%; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: #fff; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">FoodTravel Group</div>
+    <div class="nav-links">
+        <a href="index.html">หน้าแรก</a>
+        <a href="packages.html">แพ็กเกจทัวร์</a>
+        <a href="food.html">ร้านอาหาร</a>
+        <a href="contact.html">จอง & ติดต่อ</a>
+        <a href="team.html">ทีมงาน</a>
+        <a href="admin.html" class="btn-login">Login</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>ทัวร์กินเที่ยวระดับพรีเมียม</h1>
+    <p>สัมผัสประสบการณ์ใหม่ที่รวมความอร่อยและการเดินทางเข้าด้วยกัน</p>
+    <button class="btn-primary" onclick="location.href='packages.html'">ดูแพ็กเกจเลย</button>
+</div>
+
+<div class="container">
+    <div class="grid">
+        <div class="card">
+            <h3>ทำไมต้องเลือกเรา?</h3>
+            <p>เราคัดสรรร้านอาหารระดับมิชลินและเส้นทางท่องเที่ยวที่ไม่ซ้ำใคร</p>
+        </div>
+        <div class="card">
+            <h3>โปรโมชั่นพิเศษ</h3>
+            <p>จองวันนี้รับส่วนลดทันที 15% สำหรับสมาชิกใหม่</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
