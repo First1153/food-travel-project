@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login System | foodtravel.group</title>
+    <title>Login | foodtravel.group</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #18181b; --accent: #10b981; --bg: #f8fafc; --text-sub: #71717a; }
@@ -19,19 +19,21 @@
         .input-group { text-align: left; margin-bottom: 20px; }
         input { 
             width: 100%; padding: 16px; border-radius: 12px; 
-            border: 1px solid #e2e8e0; font-size: 16px; background: #f9fafb;
+            border: 1px solid #e2e8f0; font-size: 16px; background: #f9fafb;
         }
         input:focus { border-color: var(--accent); outline: none; background: #fff; }
 
         .btn-login { 
             width: 100%; background: var(--primary); color: #fff; border: none; 
             padding: 16px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 18px;
-            margin-top: 10px; margin-bottom: 25px;
+            margin-top: 10px; margin-bottom: 20px;
         }
         .btn-login:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2); }
 
-        .back-link { color: var(--text-sub); text-decoration: none; font-size: 15px; display: inline-block; }
-        .back-link:hover { color: var(--primary); }
+        .links-group { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+        .link-item { color: var(--text-sub); text-decoration: none; font-size: 14px; }
+        .link-item b { color: var(--primary); }
+        .link-item:hover { opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -49,22 +51,25 @@
 
     <button class="btn-login" onclick="handleLogin()">เข้าสู่ระบบ</button>
     
-    <br>
-    <a href="index.html" class="back-link">← กลับหน้าหลัก</a>
+    <div class="links-group">
+        <a href="register.html" class="link-item">ยังไม่มีบัญชี? <b>สมัครสมาชิกที่นี่</b></a>
+        <a href="index.html" class="link-item">← กลับหน้าหลัก</a>
+    </div>
 </div>
 
 <script>
     function handleLogin() {
         const user = document.getElementById("username").value;
         const pass = document.getElementById("password").value;
-
+        const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
         if (user === "admin" && pass === "admin99") {
             localStorage.setItem("userRole", "admin");
             localStorage.setItem("isLoggedIn", "true");
             alert("ยินดีต้อนรับ Admin เข้าสู่ระบบจัดการ");
             window.location.href = "admin_dashboard.html"; 
         } 
-        else if (user === "user" && pass === "user123") {
+        else if ((user === "user" && pass === "user123") || 
+                 (storedUser && user === storedUser.username && pass === storedUser.password)) {
             localStorage.setItem("userRole", "user");
             localStorage.setItem("isLoggedIn", "true");
             alert("เข้าสู่ระบบสำเร็จ!");
