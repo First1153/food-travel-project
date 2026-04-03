@@ -10,6 +10,7 @@
         * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.3s ease; }
         body { margin: 0; background: #fff; color: var(--primary); }
 
+        /* Navbar Style - รองรับระบบ Role */
         nav { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 20px 8%; border-bottom: 1px solid #e2e8f0; 
@@ -18,8 +19,13 @@
         }
         .logo { font-weight: 700; font-size: 22px; text-transform: lowercase; text-decoration: none; color: var(--primary); }
         .logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text-sub); margin-left: 25px; font-size: 14px; }
         .nav-links a:hover { color: var(--accent); }
+
+        /* สไตล์ปุ่ม Login / Logout */
+        .btn-auth { background: var(--primary); color: #fff !important; padding: 8px 20px; border-radius: 8px; margin-left: 25px; cursor: pointer; border: none; }
+        .btn-logout { background: #ef4444; }
 
         .container { padding: 60px 8%; max-width: 1400px; margin: auto; }
         h2 { font-size: 42px; margin-bottom: 30px; letter-spacing: -1px; }
@@ -62,6 +68,11 @@
         <a href="food.html">ร้านอาหาร</a>
         <a href="contact.html">จอง & ติดต่อ</a>
         <a href="team.html">ทีมงาน</a>
+
+        <a href="#" id="adminBadge" style="display: none; color: var(--accent); font-weight: 600;">[Admin Mode]</a>
+        
+        <a href="admin.html" id="loginBtn" class="btn-auth">Login</a>
+        <button id="logoutBtn" class="btn-auth btn-logout" style="display: none;" onclick="handleLogout()">Logout</button>
     </div>
 </nav>
 
@@ -78,6 +89,30 @@
         <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop" class="food-img" alt="Fine Dining Dish">
     </div>
 </div>
+
+<script>
+    // --- ระบบตรวจสอบสถานะ Role ---
+    const role = localStorage.getItem("userRole");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn === "true") {
+        // ถ้าล็อกอินแล้ว ให้ซ่อนปุ่ม Login และโชว์ปุ่ม Logout
+        document.getElementById("loginBtn").style.display = "none";
+        document.getElementById("logoutBtn").style.display = "block";
+        
+        // ถ้าเป็น Admin ให้โชว์ Badge พิเศษ
+        if (role === "admin") {
+            document.getElementById("adminBadge").style.display = "block";
+        }
+    }
+
+    // ฟังก์ชัน Logout
+    function handleLogout() {
+        localStorage.clear();
+        alert("ออกจากระบบเรียบร้อย");
+        window.location.href = "index.html";
+    }
+</script>
 
 </body>
 </html>
