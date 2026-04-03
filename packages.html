@@ -10,11 +10,23 @@
         * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.3s ease; }
         body { margin: 0; background: #fff; color: var(--primary); }
 
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(15px); z-index: 1000; }
+        nav { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 8%; border-bottom: 1px solid #e2e8f0; 
+            position: sticky; top: 0; background: rgba(255,255,255,0.9); 
+            backdrop-filter: blur(15px); z-index: 1000; 
+        }
         .logo { font-weight: 700; font-size: 22px; text-transform: lowercase; text-decoration: none; color: var(--primary); }
         .logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text-sub); margin-left: 25px; font-size: 14px; }
         .nav-links a:hover { color: var(--accent); }
+
+        .btn-auth { 
+            background: var(--primary); color: #fff !important; padding: 8px 20px; 
+            border-radius: 8px; margin-left: 25px; cursor: pointer; border: none; font-size: 14px;
+        }
+        .btn-logout { background: #ef4444; }
 
         .container { padding: 80px 8%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
@@ -25,9 +37,15 @@
         .card p { color: var(--text-sub); line-height: 1.6; margin-bottom: 25px; }
         .btn-view { background: var(--primary); color: #fff; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-block; }
         .btn-view:hover { background: var(--accent); transform: scale(1.05); }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .card img { height: 250px; }
+        }
     </style>
 </head>
 <body>
+
 <nav>
     <a href="index.html" class="logo">foodtravel<span>.</span>group</a>
     <div class="nav-links">
@@ -36,6 +54,11 @@
         <a href="food.html">ร้านอาหาร</a>
         <a href="contact.html">จอง & ติดต่อ</a>
         <a href="team.html">ทีมงาน</a>
+
+        <a href="#" id="adminBadge" style="display: none; color: var(--accent); font-weight: 600;">[Admin Mode]</a>
+        
+        <a href="admin.html" id="loginBtn" class="btn-auth">Login</a>
+        <button id="logoutBtn" class="btn-auth btn-logout" style="display: none;" onclick="handleLogout()">Logout</button>
     </div>
 </nav>
 
@@ -47,7 +70,7 @@
             <div class="card-content">
                 <h3>The Peak of Switzerland</h3>
                 <p>พิชิตยอดเขายุงเฟรายอค (Jungfraujoch) สัมผัสหิมะตลอดปี พร้อมที่พักระดับ Ultra-Luxury 7 วัน 6 คืน</p>
-                <a href="#" class="btn-view">จองตอนนี้</a>
+                <a href="#" class="btn-view" onclick="alert('กำลังนำท่านไปยังหน้าข้อมูลการจอง...')">จองตอนนี้</a>
             </div>
         </div>
         <div class="card">
@@ -55,10 +78,31 @@
             <div class="card-content">
                 <h3>St. Moritz Grand Tour</h3>
                 <p>ทริปชมความงามของหมู่บ้านรีสอร์ตสุดหรู และประสบการณ์ล่องรถไฟสายมรดกโลกที่สวยที่สุด</p>
-                <a href="#" class="btn-view">จองตอนนี้</a>
+                <a href="#" class="btn-view" onclick="alert('กำลังนำท่านไปยังหน้าข้อมูลการจอง...')">จองตอนนี้</a>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    const role = localStorage.getItem("userRole");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn === "true") {
+        document.getElementById("loginBtn").style.display = "none";
+        document.getElementById("logoutBtn").style.display = "block";
+        
+        if (role === "admin") {
+            document.getElementById("adminBadge").style.display = "block";
+        }
+    }
+
+    function handleLogout() {
+        localStorage.clear();
+        alert("ออกจากระบบเรียบร้อย");
+        location.reload(); 
+    }
+</script>
+
 </body>
 </html>
