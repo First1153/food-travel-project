@@ -3,169 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | foodtravel.group</title>
+    <title>Admin System | foodtravel.group</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #18181b; --accent: #10b981; --danger: #ef4444; --bg: #f8fafc; }
-        * { box-sizing: border-box; font-family: 'Kanit', sans-serif; }
-        body { margin: 0; background: var(--bg); color: var(--primary); display: flex; min-height: 100vh; }
+        * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.3s ease; }
+        body { margin: 0; background: var(--bg); color: var(--primary); min-height: 100vh; }
 
+        /* --- Login Form Style --- */
+        #loginSection { 
+            display: flex; justify-content: center; align-items: center; height: 100vh; 
+        }
+        .login-card { 
+            background: #fff; padding: 50px; border-radius: 32px; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05); width: 100%; max-width: 400px; text-align: center;
+        }
+        .login-card h2 { margin-bottom: 30px; font-size: 28px; }
+        .login-card input { 
+            width: 100%; padding: 15px; margin-bottom: 15px; 
+            border-radius: 12px; border: 1px solid #e2e8f0; font-size: 16px; 
+        }
+        .btn-login { 
+            width: 100%; background: var(--primary); color: #fff; border: none; 
+            padding: 15px; border-radius: 12px; cursor: pointer; font-weight: 600; 
+        }
+        .btn-login:hover { background: var(--accent); }
+
+        /* --- Dashboard Style (Hidden by default) --- */
+        #dashboardSection { display: none; }
         .sidebar { width: 280px; background: var(--primary); color: #fff; padding: 40px 20px; position: fixed; height: 100%; }
-        .sidebar h2 { font-size: 20px; margin-bottom: 40px; padding-left: 10px; }
-        .sidebar h2 span { color: var(--accent); }
-        .nav-item { padding: 15px; border-radius: 10px; cursor: pointer; margin-bottom: 10px; transition: 0.3s; color: #a1a1aa; text-decoration: none; display: block; }
-        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); color: #fff; }
-
         .main-content { margin-left: 280px; width: calc(100% - 280px); padding: 40px 5%; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        
+        /* สไตล์อื่นๆ เหมือนเดิม... */
+        .nav-item { padding: 15px; border-radius: 10px; cursor: pointer; margin-bottom: 10px; color: #a1a1aa; text-decoration: none; display: block; }
+        .nav-item.active { background: rgba(255,255,255,0.1); color: #fff; }
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
-        .stat-card { background: #fff; padding: 25px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
-        .stat-card h4 { margin: 0; color: #71717a; font-size: 14px; font-weight: 400; }
-        .stat-card p { margin: 10px 0 0; font-size: 28px; font-weight: 600; }
-
-        .content-box { background: #fff; border-radius: 24px; padding: 30px; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { text-align: left; padding: 15px; border-bottom: 2px solid #f1f5f9; color: #71717a; font-weight: 500; }
-        td { padding: 15px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        
-        .status-badge { padding: 5px 12px; border-radius: 50px; font-size: 12px; font-weight: 600; }
-        .status-pending { background: #fef3c7; color: #d97706; }
-        .status-done { background: #d1fae5; color: #059669; }
-
-        .btn-action { padding: 8px 12px; border-radius: 6px; cursor: pointer; border: none; font-size: 12px; margin-right: 5px; }
-        .btn-edit { background: #eff6ff; color: #2563eb; }
-        .btn-del { background: #fef2f2; color: #dc2626; }
-        .btn-add { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 10px; cursor: pointer; border: none; font-weight: 600; }
-
-        .form-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:none; justify-content:center; align-items:center; z-index:2000; }
-        .modal { background:#fff; padding:40px; border-radius:24px; width:500px; }
+        .stat-card { background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #e2e8f0; }
+        .content-box { background: #fff; border-radius: 24px; padding: 30px; border: 1px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 15px; border-bottom: 1px solid #f1f5f9; }
+        .status-badge { padding: 5px 12px; border-radius: 50px; font-size: 12px; font-weight: 600; background: #fef3c7; color: #d97706; }
     </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>foodtravel<span>.</span>admin</h2>
-    <a href="index.html" class="nav-item">หน้าแรก (Home)</a>
-    <div class="nav-item active">จัดการการจอง (Read/Update)</div>
-    <div class="nav-item">จัดการแพ็กเกจ (Create/Delete)</div>
-    <div class="nav-item">จัดการร้านอาหาร</div>
-    <div style="margin-top: auto; padding-top: 20px;">
-        <button onclick="logout()" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:14px;">Log Out</button>
+<div id="loginSection">
+    <div class="login-card">
+        <h2>Admin Login<span>.</span></h2>
+        <input type="text" id="username" placeholder="Username (admin)">
+        <input type="password" id="password" placeholder="Password (1234)">
+        <button class="btn-login" onclick="handleLogin()">Login</button>
+        <p style="margin-top: 20px; font-size: 14px;"><a href="index.html" style="color: var(--text-sub); text-decoration: none;">← กลับหน้าหลัก</a></p>
     </div>
 </div>
 
-<div class="main-content">
-    <div class="header">
-        <h1>Dashboard Overview<span>.</span></h1>
-        <button class="btn-add" onclick="showAddModal()">+ เพิ่มแพ็กเกจใหม่</button>
+<div id="dashboardSection">
+    <div class="sidebar">
+        <h2 style="font-size: 20px; margin-bottom: 40px;">foodtravel<span>.</span>admin</h2>
+        <div class="nav-item active">จัดการการจอง</div>
+        <div class="nav-item">จัดการแพ็กเกจ</div>
+        <a href="index.html" class="nav-item" style="margin-top: 50px; color: #ef4444;">← ออกจากระบบ</a>
     </div>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <h4>ยอดจองทั้งหมด (Total Bookings)</h4>
-            <p>12 รายการ</p>
+    <div class="main-content">
+        <h1 style="margin-bottom: 40px;">Dashboard Overview<span>.</span></h1>
+        
+        <div class="stats-grid">
+            <div class="stat-card"><h4>ยอดจองทั้งหมด</h4><p style="font-size: 28px; font-weight: 600;">12 รายการ</p></div>
+            <div class="stat-card"><h4>รายได้รวม</h4><p style="font-size: 28px; font-weight: 600;">฿1,548,000</p></div>
+            <div class="stat-card"><h4>Active Packages</h4><p style="font-size: 28px; font-weight: 600;">8</p></div>
         </div>
-        <div class="stat-card">
-            <h4>รายได้รวม (Estimated Revenue)</h4>
-            <p>฿1,548,000</p>
-        </div>
-        <div class="stat-card">
-            <h4>แพ็กเกจที่เปิดอยู่ (Active)</h4>
-            <p>8 แพ็กเกจ</p>
-        </div>
-    </div>
 
-    <div class="content-box">
-        <h3>รายการจองล่าสุด (Read & Update Status)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>วันที่จอง</th>
-                    <th>แพ็กเกจ</th>
-                    <th>จำนวนคน</th>
-                    <th>สถานะ</th>
-                    <th>จัดการ</th>
-                </tr>
-            </thead>
-            <tbody id="bookingTable">
-                <tr>
-                    <td>2026-04-03</td>
-                    <td>The Peak of Switzerland</td>
-                    <td>2 ท่าน</td>
-                    <td><span class="status-badge status-pending">รอดำเนินการ</span></td>
-                    <td>
-                        <button class="btn-action btn-edit" onclick="updateStatus(this)">ยืนยัน</button>
-                        <button class="btn-action btn-del" onclick="deleteRow(this)">ลบ</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2026-04-02</td>
-                    <td>St. Moritz Grand Tour</td>
-                    <td>4 ท่าน</td>
-                    <td><span class="status-badge status-done">ยืนยันแล้ว</span></td>
-                    <td>
-                        <button class="btn-action btn-edit" disabled>ยืนยัน</button>
-                        <button class="btn-action btn-del" onclick="deleteRow(this)">ลบ</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="form-overlay" id="modal">
-    <div class="modal">
-        <h3>เพิ่มแพ็กเกจใหม่ (Create)</h3>
-        <input type="text" id="pName" placeholder="ชื่อแพ็กเกจ" style="width:100%; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ddd;">
-        <input type="number" id="pPrice" placeholder="ราคาทัวร์" style="width:100%; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ddd;">
-        <button class="btn-add" style="width:100%" onclick="addPackage()">บันทึกข้อมูล</button>
-        <button onclick="closeModal()" style="width:100%; background:none; border:none; margin-top:10px; cursor:pointer; color:#71717a;">ยกเลิก</button>
+        <div class="content-box">
+            <h3>รายการจองล่าสุด (Real-time)</h3>
+            <table>
+                <thead>
+                    <tr><th>วันที่</th><th>แพ็กเกจ</th><th>สถานะ</th><th>การจัดการ</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2026-04-03</td>
+                        <td>The Peak of Switzerland</td>
+                        <td><span class="status-badge">Pending</span></td>
+                        <td><button onclick="alert('ยืนยันแล้ว')">ยืนยัน</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <script>
-    if (localStorage.getItem("userRole") !== "admin") {
-        alert("มึงไม่ใช่ Admin! ห้ามเข้าหน้านี้");
-        window.location.href = "index.html";
-    }
-
-    function showAddModal() {
-        document.getElementById('modal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('modal').style.display = 'none';
-    }
-
-    function addPackage() {
-        const name = document.getElementById('pName').value;
-        const price = document.getElementById('pPrice').value;
-        if(name && price) {
-            alert(`เพิ่มแพ็กเกจ "${name}" ราคา ${price} บาท เรียบร้อยแล้ว! (ข้อมูลถูกจำลองการสร้าง)`);
-            closeModal();
+    // ตรวจเช็คสถานะตอนโหลดหน้า
+    window.onload = function() {
+        if (localStorage.getItem("userRole") === "admin") {
+            showDashboard();
         }
     }
 
-    function updateStatus(btn) {
-        const row = btn.closest('tr');
-        const badge = row.querySelector('.status-badge');
-        badge.className = 'status-badge status-done';
-        badge.innerText = 'ยืนยันแล้ว';
-        btn.disabled = true;
-        alert("อัปเดตสถานะการจองเรียบร้อย!");
-    }
+    function handleLogin() {
+        const user = document.getElementById("username").value;
+        const pass = document.getElementById("password").value;
 
-    function deleteRow(btn) {
-        if(confirm("มึงแน่ใจนะว่าจะลบรายการนี้?")) {
-            btn.closest('tr').remove();
-            alert("ลบข้อมูลสำเร็จ!");
+        // เช็ค Username / Password แบบ Simple
+        if (user === "admin" && pass === "1234") {
+            localStorage.setItem("userRole", "admin");
+            localStorage.setItem("isLoggedIn", "true");
+            showDashboard();
+        } else {
+            alert("Username หรือ Password ผิดไอสัส! ลองใหม่");
         }
     }
 
-    function logout() {
-        localStorage.clear();
-        window.location.href = "index.html";
+    function showDashboard() {
+        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("dashboardSection").style.display = "block";
+        document.body.style.display = "flex"; // ปรับ Layout ให้ Sidebar ทำงาน
     }
 </script>
 
