@@ -10,7 +10,7 @@
         * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.3s ease; }
         body { margin: 0; background: #fff; color: var(--primary); }
 
-        /* Navbar Style */
+        /* Navbar */
         nav { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 20px 8%; border-bottom: 1px solid #e2e8f0; 
@@ -23,36 +23,44 @@
         .nav-links a { text-decoration: none; color: var(--text-sub); margin-left: 25px; font-size: 14px; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* Auth Buttons */
-        .btn-auth { 
-            background: var(--primary); color: #fff !important; padding: 8px 20px; 
-            border-radius: 8px; margin-left: 25px; cursor: pointer; border: none; font-size: 14px;
-        }
+        .btn-auth { background: var(--primary); color: #fff !important; padding: 8px 20px; border-radius: 8px; margin-left: 25px; cursor: pointer; border: none; font-size: 14px; }
         .btn-logout { background: #ef4444; }
 
         .container { padding: 80px 8%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
-        .card { background: var(--bg-soft); border-radius: 30px; overflow: hidden; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .card img { width: 100%; height: 400px; object-fit: cover; transition: transform 0.5s; }
-        .card:hover img { transform: scale(1.05); }
         
+        /* Card Style */
+        .card { background: var(--bg-soft); border-radius: 30px; overflow: hidden; border: 1px solid #f1f5f9; position: relative; }
+        .card img { width: 100%; height: 400px; object-fit: cover; }
+        
+        /* ป้ายบอกระยะเวลาบนรูป */
+        .duration-tag {
+            position: absolute; top: 20px; left: 20px;
+            background: rgba(255, 255, 255, 0.9); padding: 8px 15px;
+            border-radius: 12px; font-size: 14px; font-weight: 600;
+        }
+
         .card-content { padding: 30px; }
-        .card h3 { font-size: 24px; margin: 0 0 10px; font-weight: 600; }
-        .card p { color: var(--text-sub); line-height: 1.6; margin-bottom: 25px; height: 50px; }
-        
-        /* ปุ่มจองตอนนี้ - ลิงก์ไปยังหน้า Booking */
+        .card h3 { font-size: 24px; margin: 0 0 10px; }
+        .card p { color: var(--text-sub); line-height: 1.6; margin-bottom: 20px; }
+
+        /* ส่วนราคา */
+        .price-wrapper {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: 25px; padding-top: 15px; border-top: 1px solid #e2e8f0;
+        }
+        .price-label { font-size: 14px; color: var(--text-sub); }
+        .price-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .price-value span { font-size: 16px; font-weight: 400; color: var(--text-sub); }
+
         .btn-view { 
             background: var(--primary); color: #fff; border: none; 
-            padding: 14px 35px; border-radius: 12px; cursor: pointer; 
-            font-weight: 600; text-decoration: none; display: inline-block;
-            text-align: center; width: 100%;
+            padding: 16px; border-radius: 14px; cursor: pointer; 
+            font-weight: 600; text-decoration: none; display: block; text-align: center;
         }
-        .btn-view:hover { background: var(--accent); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2); }
+        .btn-view:hover { background: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.15); }
 
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .card img { height: 250px; }
-        }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -65,31 +73,43 @@
         <a href="food.html">ร้านอาหาร</a>
         <a href="contact.html">จอง & ติดต่อ</a>
         <a href="team.html">ทีมงาน</a>
-
         <a href="#" id="adminBadge" style="display: none; color: var(--accent); font-weight: 600;">[Admin Mode]</a>
-        
         <a href="admin.html" id="loginBtn" class="btn-auth">Login</a>
         <button id="logoutBtn" class="btn-auth btn-logout" style="display: none;" onclick="handleLogout()">Logout</button>
     </div>
 </nav>
 
 <div class="container">
-    <h2 style="font-size: 42px; margin-bottom: 40px; letter-spacing: -2px;">Selected Journeys<span>.</span></h2>
+    <h2 style="font-size: 42px; margin-bottom: 40px;">Selected Journeys<span>.</span></h2>
     <div class="grid">
         <div class="card">
+            <div class="duration-tag">🏔️ 7 วัน 6 คืน</div>
             <img src="https://images.unsplash.com/photo-1531210483974-4f8c1f33fd35?auto=format&fit=crop&w=800&q=80" alt="Swiss Alps">
             <div class="card-content">
                 <h3>The Peak of Switzerland</h3>
                 <p>พิชิตยอดเขายุงเฟรายอค (Jungfraujoch) สัมผัสหิมะตลอดปี พร้อมที่พักระดับ Ultra-Luxury</p>
+                
+                <div class="price-wrapper">
+                    <div class="price-label">ราคาเริ่มต้น</div>
+                    <div class="price-value">129,000 <span>บาท/ท่าน</span></div>
+                </div>
+
                 <a href="booking.html" class="btn-view">จองตอนนี้</a>
             </div>
         </div>
 
         <div class="card">
+            <div class="duration-tag">🚂 5 วัน 4 คืน</div>
             <img src="https://images.unsplash.com/photo-1520106212299-d99c443e4568?auto=format&fit=crop&w=800&q=80" alt="St. Moritz">
             <div class="card-content">
                 <h3>St. Moritz Grand Tour</h3>
                 <p>ทริปชมความงามของหมู่บ้านรีสอร์ตสุดหรู และประสบการณ์ล่องรถไฟสายมรดกโลกที่สวยที่สุด</p>
+                
+                <div class="price-wrapper">
+                    <div class="price-label">ราคาเริ่มต้น</div>
+                    <div class="price-value">85,500 <span>บาท/ท่าน</span></div>
+                </div>
+
                 <a href="booking.html" class="btn-view">จองตอนนี้</a>
             </div>
         </div>
@@ -97,24 +117,14 @@
 </div>
 
 <script>
-    // ตรวจสอบสถานะ User/Admin จาก LocalStorage
     const role = localStorage.getItem("userRole");
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-
     if (isLoggedIn === "true") {
         document.getElementById("loginBtn").style.display = "none";
         document.getElementById("logoutBtn").style.display = "block";
-        
-        if (role === "admin") {
-            document.getElementById("adminBadge").style.display = "block";
-        }
+        if (role === "admin") document.getElementById("adminBadge").style.display = "block";
     }
-
-    function handleLogout() {
-        localStorage.clear();
-        alert("ออกจากระบบเรียบร้อย");
-        window.location.href = "index.html";
-    }
+    function handleLogout() { localStorage.clear(); location.reload(); }
 </script>
 
 </body>
