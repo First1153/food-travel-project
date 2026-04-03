@@ -1,44 +1,23 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>foodtravel.group | Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root { --primary: #18181b; --accent: #10b981; --text-sub: #71717a; --bg-soft: #f4f4f5; }
-        * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.25s ease; }
-        body { margin: 0; background: #fff; color: var(--primary); }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; border-bottom: 1px solid #e4e4e7; position: sticky; top: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); z-index: 1000; }
-        .logo { font-weight: 700; font-size: 22px; text-transform: lowercase; }
-        .logo span { color: var(--accent); }
-        .nav-links a { text-decoration: none; color: var(--text-sub); margin-left: 25px; font-size: 14px; }
-        .nav-links a:hover { color: var(--accent); }
-        .btn-login { background: var(--primary); color: #fff !important; padding: 8px 20px; border-radius: 6px; }
-        .hero { padding: 100px 8%; text-align: center; background: radial-gradient(circle at top right, #ecfdf5, #fff); }
-        .hero h1 { font-size: 56px; margin-bottom: 20px; letter-spacing: -2px; }
-        .btn-action { background: var(--primary); color: #fff; border: none; padding: 15px 40px; border-radius: 8px; cursor: pointer; font-weight: 600; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 60px 8%; }
-        .card { background: var(--bg-soft); padding: 40px; border-radius: 16px; text-align: left; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid var(--accent); }
-    </style>
-</head>
-<body>
-<nav>
-    <div class="logo">foodtravel<span>.</span>group</div>
-    <div class="nav-links">
-        <a href="index.html">หน้าแรก</a>
-        <a href="packages.html">แพ็กเกจทัวร์</a>
-        <a href="food.html">ร้านอาหาร</a>
-        <a href="contact.html">จอง & ติดต่อ</a>
-        <a href="team.html">ทีมงาน</a>
-        <a href="admin.html" class="btn-login">Login</a>
-    </div>
-</nav>
 <div class="hero">
-    <h1>ทัวร์กินเที่ยว<span>.</span><br>ที่ออกแบบมาเพื่อคุณ</h1>
-    <p>สัมผัสรสชาติระดับมิชลิน พร้อมเส้นทางท่องเที่ยวลับที่ไม่เคยมีใครบอกคุณ</p>
-    <button class="btn-action" onclick="location.href='packages.html'">เริ่มวางแผนการเดินทาง</button>
+    <h1>Experience<span>.</span><br>The Alpine Luxury</h1>
+    <p>สัมผัสความเหนือระดับแห่งการพักผ่อน ณ เทือกเขาแอลป์ และรสชาติอาหารยุโรปขนานแท้ที่คุณไม่เคยสัมผัสจากที่ไหน</p>
+    <button class="btn-action" onclick="location.href='packages.html'">สำรวจเส้นทางยุโรป</button>
 </div>
-</body>
-</html>
+
+<div class="grid">
+    <div class="card">
+        <span class="card-icon">🏔️</span>
+        <h3>Swiss Alps Experience</h3>
+        <p>เจาะลึกเส้นทางชมวิวที่สวยที่สุดในโลก พร้อมที่พักระดับ 5 ดาวท่ามกลางหุบเขา</p>
+    </div>
+    <div class="card">
+        <span class="card-icon">🧀</span>
+        <h3>Fine Dining Tour</h3>
+        <p>ลิ้มรสชีสและช็อกโกแลตเกรดพรีเมียมจากแหล่งผลิตดั้งเดิม และดินเนอร์หรูบนยอดเขา</p>
+    </div>
+    <div class="card">
+        <span class="card-icon">🚂</span>
+        <h3>Grand Train Tour</h3>
+        <p>เดินทางด้วยรถไฟสาย Glacier Express ที่กระจกพาโนรามาเห็นวิว 360 องศา</p>
+    </div>
+</div>

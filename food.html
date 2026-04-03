@@ -1,91 +1,18 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food & Dining | foodtravel.group</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            --primary: #18181b; 
-            --accent: #10b981; 
-            --text-sub: #71717a; 
-            --bg-soft: #f4f4f5; 
-        }
-        * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.25s ease; }
-        body { margin: 0; background: #fff; color: var(--primary); }
-
-        /* Navbar Style */
-        nav { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 20px 8%; border-bottom: 1px solid #e4e4e7; 
-            position: sticky; top: 0; background: rgba(255,255,255,0.9); 
-            backdrop-filter: blur(10px); z-index: 1000; 
-        }
-        .logo { font-weight: 700; font-size: 22px; text-transform: lowercase; text-decoration: none; color: var(--primary); }
-        .logo span { color: var(--accent); }
-        .nav-links a { text-decoration: none; color: var(--text-sub); margin-left: 25px; font-size: 14px; }
-        .nav-links a:hover { color: var(--accent); }
-        .btn-login { background: var(--primary); color: #fff !important; padding: 8px 20px; border-radius: 6px; }
-
-        /* Content Layout */
-        .container { padding: 60px 8%; }
-        h2 { font-size: 32px; margin-bottom: 20px; }
-        h2 span { color: var(--accent); }
-        
-        .main-banner { 
-            width: 100%; height: 351px; object-fit: cover; 
-            border-radius: 20px; margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { 
-            background: var(--bg-soft); padding: 25px; border-radius: 20px; 
-            border: 1px solid transparent; text-align: left;
-        }
-        .card:hover { 
-            background: #fff; border-color: var(--accent); 
-            transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); 
-        }
-        .card h3 { margin-top: 0; margin-bottom: 10px; font-size: 22px; }
-        .card p { color: var(--text-sub); margin-bottom: 20px; font-size: 15px; }
-        .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; }
-    </style>
-</head>
-<body>
-
-<nav>
-    <a href="index.html" class="logo">foodtravel<span>.</span>group</a>
-    <div class="nav-links">
-        <a href="index.html">หน้าแรก</a>
-        <a href="packages.html">แพ็กเกจทัวร์</a>
-        <a href="food.html">ร้านอาหาร</a>
-        <a href="contact.html">จอง & ติดต่อ</a>
-        <a href="team.html">ทีมงาน</a>
-        <a href="admin.html" class="btn-login">Login</a>
-    </div>
-</nav>
-
 <div class="container">
-    <h2>Dining Experience<span>.</span></h2>
-    
-    <img src="9983ca67058c0795a4b0ab0370213178.jpg" class="main-banner" alt="Dining Experience">
+    <h2>Alpine Fine Dining<span>.</span></h2>
+    <img src="luxury_dining.jpg" class="main-banner" alt="Luxury Dining">
 
     <div class="grid">
         <div class="card">
-            <h3>Zen Omakase</h3>
-            <p>วัตถุดิบพรีเมียมส่งตรงจากตลาดปลาซึกิจิทุกวัน</p>
-            <img src="b0ff3ce0573ca38eba22c321edc7ec35.jpg" alt="Zen Omakase">
+            <h3>Le Sommet Restaurant</h3>
+            <p>ดื่มด่ำกับอาหารฝรั่งเศสสไตล์ฟิวชั่น พร้อมไวน์ชั้นเลิศจากแคว้นวาเลส์</p>
+            <img src="food_swiss_1.jpg" alt="French Fusion">
         </div>
         
         <div class="card">
-            <h3>Street Soul</h3>
-            <p>อาหารท้องถิ่นรสชาติดั้งเดิมในบรรยากาศ Modern</p>
-            <img src="79c536980667d3398c2debf4f42527fb.jpg" alt="Street Soul">
+            <h3>The Chalet Kitchen</h3>
+            <p>สัมผัสรสชาติต้นตำรับสวิสฟองดูว์ ในกระท่อมไม้สนโบราณอายุกว่า 100 ปี</p>
+            <img src="food_swiss_2.jpg" alt="Swiss Fondue">
         </div>
     </div>
 </div>
-
-</body>
-</html>

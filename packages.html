@@ -1,121 +1,18 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tour Packages | foodtravel.group</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            --primary: #18181b; 
-            --accent: #10b981; 
-            --text-sub: #71717a; 
-            --bg-soft: #f4f4f5; 
-        }
-        * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.25s ease; }
-        body { margin: 0; background: #fff; color: var(--primary); }
-
-        /* Navbar Style */
-        nav { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 20px 8%; border-bottom: 1px solid #e4e4e7; 
-            position: sticky; top: 0; background: rgba(255,255,255,0.9); 
-            backdrop-filter: blur(10px); z-index: 1000; 
-        }
-        .logo { font-weight: 700; font-size: 22px; text-transform: lowercase; text-decoration: none; color: var(--primary); }
-        .logo span { color: var(--accent); }
-        .nav-links a { text-decoration: none; color: var(--text-sub); margin-left: 25px; font-size: 14px; }
-        .nav-links a:hover { color: var(--accent); }
-        .btn-login { background: var(--primary); color: #fff !important; padding: 8px 20px; border-radius: 6px; }
-
-        /* Content Layout */
-        .container { padding: 60px 8%; }
-        h2 { font-size: 32px; margin-bottom: 10px; }
-        h2 span { color: var(--accent); }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 30px; 
-            padding: 40px 0; 
-        }
-
-        .card { 
-            background: var(--bg-soft); 
-            padding: 25px; 
-            border-radius: 24px; 
-            border: 1px solid transparent;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .card:hover { 
-            background: #fff; 
-            border-color: var(--accent); 
-            transform: translateY(-10px); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05); 
-        }
-
-        .card img { 
-            width: 100%; 
-            height: 355px; 
-            object-fit: cover; 
-            border-radius: 16px; 
-        }
-
-        .card h3 { margin: 0; font-size: 24px; }
-        .card p { color: var(--text-sub); margin: 0; line-height: 1.6; }
-
-        .btn-action {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            width: fit-content;
-        }
-        .btn-action:hover {
-            background: var(--accent);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-        }
-    </style>
-</head>
-<body>
-
-<nav>
-    <a href="index.html" class="logo">foodtravel<span>.</span>group</a>
-    <div class="nav-links">
-        <a href="index.html">หน้าแรก</a>
-        <a href="packages.html">แพ็กเกจทัวร์</a>
-        <a href="food.html">ร้านอาหาร</a>
-        <a href="contact.html">จอง & ติดต่อ</a>
-        <a href="team.html">ทีมงาน</a>
-        <a href="admin.html" class="btn-login">Login</a>
-    </div>
-</nav>
-
 <div class="container">
-    <h2>ทัวร์ยอดนิยม<span>.</span></h2>
-    
+    <h2>Luxury European Tour<span>.</span></h2>
     <div class="grid">
         <div class="card">
-            <img src="dbf5920bf7646ef9dfef715889ef247a.jpg" alt="Tokyo Anime Route">
-            <h3>Tokyo Anime Route</h3>
-            <p>ตามรอยอนิเมะดังแบบเจาะลึก 5 วัน 4 คืน สัมผัสบรรยากาศจริงจากฉากในตำนาน</p>
-            <button class="btn-action">ดูรายละเอียด</button>
-            <img src="68e149a2e07377c935c99f0ea79d9271.jpg" alt="Tokyo View">
+            <img src="swiss_view_1.jpg" alt="Swiss Alps">
+            <h3>The Peak of Switzerland</h3>
+            <p>พิชิตยอดเขายุงเฟรายอค (Jungfraujoch) จุดที่สูงที่สุดในยุโรป 7 วัน 6 คืน</p>
+            <button class="btn-action">จองทริปนี้</button>
         </div>
 
         <div class="card">
-            <h3>Osaka Food Hunter</h3>
-            <p>ตะลุยร้านลับย่านโดทงโบริที่คนไทยยังไม่ค่อยรู้จัก อิ่มอร่อยกับต้นตำรับโอซาก้า</p>
-            <button class="btn-action">ดูรายละเอียด</button>
-            <img src="35fb216339e4b0b238e97cf75d374b42.jpg" alt="Osaka Food">
+            <h3>Italian-Swiss Riviera</h3>
+            <p>ล่องเรือทะเลสาบโคโม่ เชื่อมต่อเมืองลูกาโน สัมผัสวัฒนธรรมสองฝั่งพรมแดน</p>
+            <button class="btn-action">จองทริปนี้</button>
+            <img src="swiss_view_2.jpg" alt="Lake Lugano">
         </div>
     </div>
 </div>
-
-</body>
-</html>
