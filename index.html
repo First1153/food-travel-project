@@ -23,9 +23,15 @@
         }
         .logo { font-weight: 700; font-size: 22px; text-transform: lowercase; text-decoration: none; color: var(--primary); }
         .logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text-sub); margin-left: 25px; font-size: 14px; font-weight: 400; }
         .nav-links a:hover { color: var(--accent); }
-        .btn-login-nav { background: var(--primary); color: #fff !important; padding: 10px 24px; border-radius: 8px; }
+
+        .btn-auth { 
+            background: var(--primary); color: #fff !important; padding: 10px 24px; 
+            border-radius: 8px; margin-left: 25px; cursor: pointer; border: none; font-size: 14px;
+        }
+        .btn-logout { background: #ef4444; }
 
         .hero { 
             padding: 140px 8%; text-align: center; 
@@ -80,7 +86,11 @@
         <a href="food.html">ร้านอาหาร</a>
         <a href="contact.html">จอง & ติดต่อ</a>
         <a href="team.html">ทีมงาน</a>
-        <a href="admin.html" class="btn-login-nav">Login</a>
+
+        <a href="#" id="adminBadge" style="display: none; color: var(--accent); font-weight: 600;">[Admin Mode]</a>
+        
+        <a href="admin.html" id="loginBtn" class="btn-auth">Login</a>
+        <button id="logoutBtn" class="btn-auth btn-logout" style="display: none;" onclick="handleLogout()">Logout</button>
     </div>
 </nav>
 
@@ -107,6 +117,26 @@
         <p>เดินทางด้วยรถไฟสาย Glacier Express ที่มีกระจกพาโนรามา ให้คุณเห็นวิวแอลป์แบบ 360 องศาตลอดการเดินทาง</p>
     </div>
 </div>
+
+<script>
+    const role = localStorage.getItem("userRole");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn === "true") {
+        document.getElementById("loginBtn").style.display = "none";
+        document.getElementById("logoutBtn").style.display = "block";
+        
+        if (role === "admin") {
+            document.getElementById("adminBadge").style.display = "block";
+        }
+    }
+
+    function handleLogout() {
+        localStorage.clear();
+        alert("ออกจากระบบเรียบร้อย");
+        location.reload(); // รีโหลดหน้าเพื่อล้างสถานะปุ่ม
+    }
+</script>
 
 </body>
 </html>
