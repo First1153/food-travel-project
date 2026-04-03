@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | foodtravel.group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #18181b; --accent: #10b981; --bg: #f8fafc; --text-sub: #71717a; }
+        * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.3s ease; }
+        body { margin: 0; background: var(--bg); color: var(--primary); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+        .register-container { 
+            background: #fff; padding: 50px; border-radius: 32px; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05); width: 100%; max-width: 420px; text-align: center;
+        }
+        .register-container h2 { margin-bottom: 30px; font-size: 28px; font-weight: 600; }
+
+        .input-group { text-align: left; margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 14px; color: var(--text-sub); padding-left: 5px; }
+        input { 
+            width: 100%; padding: 16px; border-radius: 12px; 
+            border: 1px solid #e2e8f0; font-size: 16px; background: #f9fafb;
+        }
+        input:focus { border-color: var(--accent); outline: none; background: #fff; }
+
+        .btn-register { 
+            width: 100%; background: var(--accent); color: #fff; border: none; 
+            padding: 16px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 18px;
+            margin-top: 20px; margin-bottom: 20px;
+        }
+        .btn-register:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .login-link { color: var(--text-sub); text-decoration: none; font-size: 14px; }
+        .login-link b { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h2>สร้างบัญชีใหม่<span>.</span></h2>
+
+    <div class="input-group">
+        <label>ชื่อผู้ใช้งาน (Username)</label>
+        <input type="text" id="regUser" placeholder="ตั้งชื่อผู้ใช้งาน">
+    </div>
+
+    <div class="input-group">
+        <label>รหัสผ่าน (Password)</label>
+        <input type="password" id="regPass" placeholder="ตั้งรหัสผ่าน">
+    </div>
+
+    <div class="input-group">
+        <label>ยืนยันรหัสผ่าน</label>
+        <input type="password" id="confirmPass" placeholder="กรอกรหัสผ่านอีกครั้ง">
+    </div>
+
+    <button class="btn-register" onclick="handleRegister()">สมัครสมาชิก</button>
+    
+    <p><a href="admin.html" class="login-link">มีบัญชีอยู่แล้ว? <b>เข้าสู่ระบบ</b></a></p>
+</div>
+
+<script>
+    function handleRegister() {
+        const user = document.getElementById("regUser").value;
+        const pass = document.getElementById("regPass").value;
+        const confirm = document.getElementById("confirmPass").value;
+
+        if (!user || !pass) {
+            alert("กรอกข้อมูลให้ครบดิเอ๋!");
+            return;
+        }
+
+        if (pass !== confirm) {
+            alert("รหัสผ่านไม่ตรงกันไอสัส เช็คใหม่!");
+            return;
+        }
+
+        // เก็บข้อมูลลง localStorage (จำลอง Database)
+        const userData = { username: user, password: pass, role: 'user' };
+        localStorage.setItem("registeredUser", JSON.stringify(userData));
+
+        alert("สมัครสมาชิกสำเร็จ! ลองไป Login ดู");
+        window.location.href = "admin.html"; // สมัครเสร็จส่งไปหน้า Login
+    }
+</script>
+
+</body>
+</html>
