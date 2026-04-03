@@ -3,121 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin System | foodtravel.group</title>
+    <title>Login System | foodtravel.group</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #18181b; --accent: #10b981; --danger: #ef4444; --bg: #f8fafc; }
+        :root { --primary: #18181b; --accent: #10b981; --bg: #f8fafc; --text-sub: #71717a; }
         * { box-sizing: border-box; font-family: 'Kanit', sans-serif; transition: all 0.3s ease; }
-        body { margin: 0; background: var(--bg); color: var(--primary); min-height: 100vh; }
+        body { margin: 0; background: var(--bg); color: var(--primary); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
 
-        /* --- Login Form Style --- */
-        #loginSection { 
-            display: flex; justify-content: center; align-items: center; height: 100vh; 
-        }
-        .login-card { 
+        .login-container { 
             background: #fff; padding: 50px; border-radius: 32px; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.05); width: 100%; max-width: 400px; text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05); width: 100%; max-width: 420px; text-align: center;
         }
-        .login-card h2 { margin-bottom: 30px; font-size: 28px; }
-        .login-card input { 
-            width: 100%; padding: 15px; margin-bottom: 15px; 
-            border-radius: 12px; border: 1px solid #e2e8f0; font-size: 16px; 
+        .login-container h2 { margin-bottom: 10px; font-size: 28px; }
+        .login-container p { color: var(--text-sub); margin-bottom: 30px; font-size: 14px; }
+
+        .input-group { text-align: left; margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-sub); }
+        input { 
+            width: 100%; padding: 14px; border-radius: 12px; 
+            border: 1px solid #e2e8f0; font-size: 16px; background: #f9fafb;
         }
+        input:focus { border-color: var(--accent); outline: none; background: #fff; }
+
         .btn-login { 
             width: 100%; background: var(--primary); color: #fff; border: none; 
-            padding: 15px; border-radius: 12px; cursor: pointer; font-weight: 600; 
+            padding: 16px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px;
+            margin-top: 10px;
         }
-        .btn-login:hover { background: var(--accent); }
+        .btn-login:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2); }
 
-        /* --- Dashboard Style (Hidden by default) --- */
-        #dashboardSection { display: none; }
-        .sidebar { width: 280px; background: var(--primary); color: #fff; padding: 40px 20px; position: fixed; height: 100%; }
-        .main-content { margin-left: 280px; width: calc(100% - 280px); padding: 40px 5%; }
-        /* สไตล์อื่นๆ เหมือนเดิม... */
-        .nav-item { padding: 15px; border-radius: 10px; cursor: pointer; margin-bottom: 10px; color: #a1a1aa; text-decoration: none; display: block; }
-        .nav-item.active { background: rgba(255,255,255,0.1); color: #fff; }
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
-        .stat-card { background: #fff; padding: 25px; border-radius: 20px; border: 1px solid #e2e8f0; }
-        .content-box { background: #fff; border-radius: 24px; padding: 30px; border: 1px solid #e2e8f0; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { text-align: left; padding: 15px; border-bottom: 1px solid #f1f5f9; }
-        .status-badge { padding: 5px 12px; border-radius: 50px; font-size: 12px; font-weight: 600; background: #fef3c7; color: #d97706; }
+        .hint { margin-top: 25px; padding: 15px; background: #f1f5f9; border-radius: 12px; font-size: 12px; color: #64748b; line-height: 1.6; }
     </style>
 </head>
 <body>
 
-<div id="loginSection">
-    <div class="login-card">
-        <h2>Admin Login<span>.</span></h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button class="btn-login" onclick="handleLogin()">Login</button>
-        <p style="margin-top: 20px; font-size: 14px;"><a href="index.html" style="color: var(--text-sub); text-decoration: none;">← กลับหน้าหลัก</a></p>
-    </div>
-</div>
+<div class="login-container">
+    <h2>เข้าสู่ระบบ<span>.</span></h2>
+    <p>กรุณากรอกข้อมูลเพื่อเข้าใช้งานระบบ</p>
 
-<div id="dashboardSection">
-    <div class="sidebar">
-        <h2 style="font-size: 20px; margin-bottom: 40px;">foodtravel<span>.</span>admin</h2>
-        <div class="nav-item active">จัดการการจอง</div>
-        <div class="nav-item">จัดการแพ็กเกจ</div>
-        <a href="index.html" class="nav-item" style="margin-top: 50px; color: #ef4444;">← ออกจากระบบ</a>
+    <div class="input-group">
+        <label>ชื่อผู้ใช้งาน (Username)</label>
+        <input type="text" id="username" placeholder="ลองใส่ admin หรือ user">
     </div>
 
-    <div class="main-content">
-        <h1 style="margin-bottom: 40px;">Dashboard Overview<span>.</span></h1>
-        
-        <div class="stats-grid">
-            <div class="stat-card"><h4>ยอดจองทั้งหมด</h4><p style="font-size: 28px; font-weight: 600;">12 รายการ</p></div>
-            <div class="stat-card"><h4>รายได้รวม</h4><p style="font-size: 28px; font-weight: 600;">฿1,548,000</p></div>
-            <div class="stat-card"><h4>Active Packages</h4><p style="font-size: 28px; font-weight: 600;">8</p></div>
-        </div>
-
-        <div class="content-box">
-            <h3>รายการจองล่าสุด (Real-time)</h3>
-            <table>
-                <thead>
-                    <tr><th>วันที่</th><th>แพ็กเกจ</th><th>สถานะ</th><th>การจัดการ</th></tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2026-04-03</td>
-                        <td>The Peak of Switzerland</td>
-                        <td><span class="status-badge">Pending</span></td>
-                        <td><button onclick="alert('ยืนยันแล้ว')">ยืนยัน</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="input-group">
+        <label>รหัสผ่าน (Password)</label>
+        <input type="password" id="password" placeholder="รหัสผ่านคือ 1234">
     </div>
+
+    <button class="btn-login" onclick="handleLogin()">เข้าสู่ระบบ</button>
+
+    <div class="hint">
+        <b>Admin:</b> user: admin / pass: 1234 (จัดการระบบ)<br>
+        <b>User:</b> user: user / pass: 5678 (จองแพ็กเกจ)
+    </div>
+    
+    <p style="margin-top: 20px;"><a href="index.html" style="color: var(--text-sub); text-decoration: none; font-size: 14px;">← กลับหน้าหลัก</a></p>
 </div>
 
 <script>
-    // ตรวจเช็คสถานะตอนโหลดหน้า
-    window.onload = function() {
-        if (localStorage.getItem("userRole") === "admin") {
-            showDashboard();
-        }
-    }
-
     function handleLogin() {
         const user = document.getElementById("username").value;
         const pass = document.getElementById("password").value;
 
-        // เช็ค Username / Password แบบ Simple
-        if (user === "admin" && pass === "1234") {
-            localStorage.setItem("userRole", "admin");
-            localStorage.setItem("isLoggedIn", "true");
-            showDashboard();
+        if (pass === "1234") {
+            if (user === "admin") {
+                // เก็บสถานะ Admin
+                localStorage.setItem("userRole", "admin");
+                localStorage.setItem("isLoggedIn", "true");
+                alert("ยินดีต้อนรับผู้ดูแลระบบ!");
+                // นำทางไปหน้า Dashboard (มึงอาจจะสร้างไฟล์ dashboard.html แยก หรือใช้หน้าเดิมก็ได้)
+                window.location.href = "admin_dashboard.html"; 
+            } else if (user === "user") {
+                // เก็บสถานะ User ทั่วไป
+                localStorage.setItem("userRole", "user");
+                localStorage.setItem("isLoggedIn", "true");
+                alert("เข้าสู่ระบบสำเร็จ!");
+                window.location.href = "index.html"; 
+            } else {
+                alert("ไม่พบชื่อผู้ใช้งานนี้ในระบบ!");
+            }
         } else {
-            alert("Username หรือ Password ผิดไอสัส! ลองใหม่");
+            alert("รหัสผ่านไม่ถูกต้อง!");
         }
     }
 
-    function showDashboard() {
-        document.getElementById("loginSection").style.display = "none";
-        document.getElementById("dashboardSection").style.display = "block";
-        document.body.style.display = "flex"; // ปรับ Layout ให้ Sidebar ทำงาน
+    // กันเหนียว: ถ้าเคย Login แล้วให้เด้งไปหน้าตาม Role เลย
+    window.onload = function() {
+        if (localStorage.getItem("isLoggedIn") === "true") {
+            if (localStorage.getItem("userRole") === "admin") {
+                window.location.href = "admin_dashboard.html";
+            } else {
+                window.location.href = "index.html";
+            }
+        }
     }
 </script>
 
