@@ -68,14 +68,11 @@
 
         if (pass === "1234") {
             if (user === "admin") {
-                // เก็บสถานะ Admin
                 localStorage.setItem("userRole", "admin");
                 localStorage.setItem("isLoggedIn", "true");
                 alert("ยินดีต้อนรับผู้ดูแลระบบ!");
-                // นำทางไปหน้า Dashboard (มึงอาจจะสร้างไฟล์ dashboard.html แยก หรือใช้หน้าเดิมก็ได้)
                 window.location.href = "admin_dashboard.html"; 
             } else if (user === "user") {
-                // เก็บสถานะ User ทั่วไป
                 localStorage.setItem("userRole", "user");
                 localStorage.setItem("isLoggedIn", "true");
                 alert("เข้าสู่ระบบสำเร็จ!");
@@ -88,7 +85,6 @@
         }
     }
 
-    // กันเหนียว: ถ้าเคย Login แล้วให้เด้งไปหน้าตาม Role เลย
     window.onload = function() {
         if (localStorage.getItem("isLoggedIn") === "true") {
             if (localStorage.getItem("userRole") === "admin") {
