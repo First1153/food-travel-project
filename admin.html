@@ -14,51 +14,53 @@
             background: #fff; padding: 50px; border-radius: 32px; 
             box-shadow: 0 20px 60px rgba(0,0,0,0.05); width: 100%; max-width: 420px; text-align: center;
         }
-        .login-container h2 { margin-bottom: 10px; font-size: 28px; }
-        .login-container p { color: var(--text-sub); margin-bottom: 30px; font-size: 14px; }
+        .login-container h2 { margin-bottom: 30px; font-size: 28px; font-weight: 600; }
 
         .input-group { text-align: left; margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-sub); }
         input { 
-            width: 100%; padding: 14px; border-radius: 12px; 
+            width: 100%; padding: 16px; border-radius: 12px; 
             border: 1px solid #e2e8f0; font-size: 16px; background: #f9fafb;
         }
         input:focus { border-color: var(--accent); outline: none; background: #fff; }
 
         .btn-login { 
             width: 100%; background: var(--primary); color: #fff; border: none; 
-            padding: 16px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 16px;
-            margin-top: 10px;
+            padding: 16px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 18px;
+            margin-top: 10px; margin-bottom: 25px;
         }
         .btn-login:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2); }
 
-        .hint { margin-top: 25px; padding: 15px; background: #f1f5f9; border-radius: 12px; font-size: 12px; color: #64748b; line-height: 1.6; }
+        .hint-box { 
+            background: #f1f5f9; padding: 20px; border-radius: 16px; 
+            font-size: 14px; color: #475569; line-height: 1.8; margin-bottom: 30px;
+        }
+        .hint-box b { color: #1e293b; }
+
+        .back-link { color: var(--text-sub); text-decoration: none; font-size: 15px; display: inline-block; }
+        .back-link:hover { color: var(--primary); }
     </style>
 </head>
 <body>
 
 <div class="login-container">
     <h2>เข้าสู่ระบบ<span>.</span></h2>
-    <p>กรุณากรอกข้อมูลเพื่อเข้าใช้งานระบบ</p>
 
     <div class="input-group">
-        <label>ชื่อผู้ใช้งาน (Username)</label>
-        <input type="text" id="username" placeholder="username">
+        <input type="text" id="username" placeholder="ชื่อผู้ใช้งาน">
     </div>
 
     <div class="input-group">
-        <label>รหัสผ่าน (Password)</label>
-        <input type="password" id="password" placeholder="password">
+        <input type="password" id="password" placeholder="รหัสผ่าน">
     </div>
 
     <button class="btn-login" onclick="handleLogin()">เข้าสู่ระบบ</button>
 
-    <div class="hint">
-        <b>Admin:</b> user: admin / pass: 1234 (จัดการระบบ)<br>
-        <b>User:</b> user: user / pass: 1234 (จองแพ็กเกจ)
+    <div class="hint-box">
+        <b>Admin:</b> user: admin / pass: admin99 (จัดการระบบ)<br>
+        <b>User:</b> user: user / pass: user123 (จองแพ็กเกจ)
     </div>
     
-    <p style="margin-top: 20px;"><a href="index.html" style="color: var(--text-sub); text-decoration: none; font-size: 14px;">← กลับหน้าหลัก</a></p>
+    <a href="index.html" class="back-link">← กลับหน้าหลัก</a>
 </div>
 
 <script>
@@ -66,25 +68,22 @@
         const user = document.getElementById("username").value;
         const pass = document.getElementById("password").value;
 
-        if (pass === "1234") {
-            if (user === "admin") {
-                localStorage.setItem("userRole", "admin");
-                localStorage.setItem("isLoggedIn", "true");
-                alert("ยินดีต้อนรับผู้ดูแลระบบ!");
-                window.location.href = "admin_dashboard.html"; 
-            } else if (user === "user") {
-                localStorage.setItem("userRole", "user");
-                localStorage.setItem("isLoggedIn", "true");
-                alert("เข้าสู่ระบบสำเร็จ!");
-                window.location.href = "index.html"; 
-            } else {
-                alert("ไม่พบชื่อผู้ใช้งานนี้ในระบบ!");
-            }
-        } else {
-            alert("รหัสผ่านไม่ถูกต้อง!");
+        if (user === "admin" && pass === "admin99") {
+            localStorage.setItem("userRole", "admin");
+            localStorage.setItem("isLoggedIn", "true");
+            alert("ยินดีต้อนรับ Admin เข้าสู่ระบบจัดการ");
+            window.location.href = "admin_dashboard.html"; 
+        } 
+        else if (user === "user" && pass === "user123") {
+            localStorage.setItem("userRole", "user");
+            localStorage.setItem("isLoggedIn", "true");
+            alert("เข้าสู่ระบบสำเร็จ! กำลังพาท่านไปเลือกทัวร์");
+            window.location.href = "index.html"; 
+        } 
+        else {
+            alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้องไอสัส!");
         }
     }
-
     window.onload = function() {
         if (localStorage.getItem("isLoggedIn") === "true") {
             if (localStorage.getItem("userRole") === "admin") {
